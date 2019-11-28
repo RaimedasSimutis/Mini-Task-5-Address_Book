@@ -1,0 +1,22 @@
+h3 {
+    text-align: center;
+}
+
+body {
+    /* background-color: white; */
+    background: linear-gradient(90deg, rgba(160, 216, 240, 1) 0%, rgba(160, 240, 237, 1) 52%, rgba(160, 240, 232, 1) 100%);
+}
+#output p, #favorites-output p {
+    display: inline-block;
+    width: 20%;
+}
+
+section {
+    /* border: 1px solid  black; */
+    margin: 5px 0;
+}
+
+/* #output  input {
+    position: absolute;
+    left: 0px;
+} */
