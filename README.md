@@ -9,4 +9,4 @@
 - Add function to delete multiple entries at once.
 
 ### Solution
-[Address-Book](https://raimedassimutis.github.io/Mini-Task-4-Password-Generator/)
+[Address-Book](https://raimedassimutis.github.io/Mini-Task-5-Address_Book/)
