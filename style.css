@@ -3,8 +3,7 @@ h3 {
 }
 
 body {
-    /* background-color: white; */
-    background: linear-gradient(90deg, rgba(160, 216, 240, 1) 0%, rgba(160, 240, 237, 1) 52%, rgba(160, 240, 232, 1) 100%);
+    background: linear-gradient(90deg, #e4efe9  0%, #93a5cf 100%);
 }
 #output p, #favorites-output p {
     display: inline-block;
@@ -12,11 +11,6 @@ body {
 }
 
 section {
-    /* border: 1px solid  black; */
     margin: 5px 0;
 }
 
-/* #output  input {
-    position: absolute;
-    left: 0px;
-} */

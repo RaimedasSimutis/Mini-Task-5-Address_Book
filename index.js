@@ -3,11 +3,10 @@ const orderSelection = document.getElementById('orderSelection');
 const searchInput = document.getElementById('searchInput');
 const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
 
+
 const deleteSelectedContacts = (elementToDelete) => {
-   //getCardsFromLocalStorage()
     return elementToDelete.filter((el) => el.selected === false);
 }
-
 
 const contactsSearch = (arrToSearch, valueToSearch) => {
     return arrToSearch.filter((el) => el.name.includes(valueToSearch) || el.number.includes(valueToSearch));
@@ -29,7 +28,7 @@ const contactsSorting = (arrToSort, sortType) => {
 
         case 'byNumberDESC':
             arrToSort.sort((a, b) => b.number.localeCompare(a.number));
-            
+
             break;
     }
 
@@ -41,13 +40,13 @@ const saveContactToLocalStorage = (arr) => {
     localStorage.setItem('contacts', contactsArrStringified);
 }
 
-const getCardsFromLocalStorage = () => {
+const getContactsFromLocalStorage = () => {
     const contactsFromStorage = localStorage.getItem('contacts');
     return (contactsFromStorage === null) ? [] : JSON.parse(contactsFromStorage);
 }
 
 const saveContact = () => {
-    let contactsArr = getCardsFromLocalStorage();
+    let contactsArr = getContactsFromLocalStorage();
     const date = new Date();
     const contact = {
         id: date.getTime(),
@@ -76,7 +75,6 @@ const renderFavoriteContacts = (arrElement) => {
         const actionsCol = document.createElement('td');
         const addToFavoritesButton = document.createElement('button');
 
-        // style
         addToFavoritesButton.classList.add('btn', 'btn-outline-warning', 'mx-1');
 
         contactName.textContent = element.name;
@@ -124,17 +122,14 @@ const renderContacts = (arrElement) => {
         const editContactButton = document.createElement('button');
         const selectedCheckBox = document.createElement('input');
 
-        //for cotacts editing
         const editContactName = document.createElement('input');
 
-        //style
         editContactName.style.display = 'none';
         contactDeleteButton.classList.add('btn', 'btn-outline-danger', 'mx-1');
         addToFavoritesButton.classList.add('btn', 'btn-outline-warning', 'mx-1');
         editContactButton.classList.add('btn', 'btn-outline-info', 'mx-1');
         selectedCheckBox.type = 'checkbox';
 
-        //content
         contactName.textContent = element.name;
         contactNumber.textContent = element.number;
         contactDeleteButton.textContent = 'Del';
@@ -155,18 +150,17 @@ const renderContacts = (arrElement) => {
         actionsCol.appendChild(contactDeleteButton);
         actionsCol.appendChild(addToFavoritesButton);
         actionsCol.appendChild(editContactButton);
-        
+
         contactContainer.appendChild(actionsCol)
-        
+
         outputContainer.appendChild(contactContainer);
 
         contactDeleteButton.addEventListener('click', (event) => {
-            //contactContainer.remove();
             let filteredArrElement = arrElement.filter(el => el.id !== element.id)
             saveContactToLocalStorage(filteredArrElement);
             renderContacts(filteredArrElement);
             renderFavoriteContacts(filteredArrElement);
-            
+
         })
 
         addToFavoritesButton.addEventListener('click', (event) => {
@@ -198,27 +192,19 @@ const renderContacts = (arrElement) => {
                 saveContactToLocalStorage(fullArr);
                 renderFavoriteContacts(contactsSorting(fullArr, 'byNameASC'));
                 renderContacts(contactsSorting(fullArr, orderSelection.selectedOptions[0].value));
-            } 
+            }
         })
 
         selectedCheckBox.addEventListener('click', (event) => {
-            console.log('bam');
-            //console.log(event.target.checked);
-            
+
             if (event.target.checked) {
                 element.selected = true;
-                
+
             } else {
                 element.selected = false;
             }
 
             saveContactToLocalStorage(fullArr);
-
-            //console.log(fullArr)
-
-            // saveContactToLocalStorage(arrElement);
-            // renderFavoriteContacts(arrElement);
-            // renderContacts(arrElement);
 
         })
     })
@@ -231,32 +217,29 @@ contactInputForm.addEventListener('submit', (e) => {
 })
 
 orderSelection.addEventListener('change', (e) => {
-    
-    renderContacts(contactsSorting(getCardsFromLocalStorage(), e.target.selectedOptions[0].value));
+
+    renderContacts(contactsSorting(getContactsFromLocalStorage(), e.target.selectedOptions[0].value));
 
 })
 
 searchInput.addEventListener('input', (e) => {
 
     if (e.target.value) {
-        renderContacts(contactsSearch(getCardsFromLocalStorage(), e.target.value));
+        renderContacts(contactsSearch(getContactsFromLocalStorage(), e.target.value));
 
     } else {
-        renderContacts(contactsSorting(getCardsFromLocalStorage(), orderSelection.selectedOptions[0].value));
+        renderContacts(contactsSorting(getContactsFromLocalStorage(), orderSelection.selectedOptions[0].value));
     }
 
 })
 
 deleteSelectedBtn.addEventListener('click', (e) => {
-    
-    saveContactToLocalStorage(deleteSelectedContacts(getCardsFromLocalStorage()));
-    renderContacts(getCardsFromLocalStorage());
 
-
+    saveContactToLocalStorage(deleteSelectedContacts(getContactsFromLocalStorage()));
+    renderContacts(getContactsFromLocalStorage());
 })
 
 
 
-renderContacts(contactsSorting(getCardsFromLocalStorage(), 'byNameASC'));
-//renderContacts(getCardsFromLocalStorage());
-renderFavoriteContacts(getCardsFromLocalStorage());
+renderContacts(contactsSorting(getContactsFromLocalStorage(), 'byNameASC'));
+renderFavoriteContacts(getContactsFromLocalStorage());
